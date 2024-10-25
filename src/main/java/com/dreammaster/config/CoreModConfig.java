@@ -62,7 +62,7 @@ public class CoreModConfig extends ConfigManager {
         ModDebugVersionDisplay_Enabled = true;
         ModHazardousItems_Enabled = false;
         ModCustomToolTips_Enabled = false;
-        ModItemInHandInfo_Enabled = false;
+        ModItemInHandInfo_Enabled = true;
         ModCustomFuels_Enabled = false;
         ModCustomDrops_Enabled = false;
         ModAdminErrorLogs_Enabled = true;

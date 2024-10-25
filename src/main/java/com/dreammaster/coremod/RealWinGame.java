@@ -30,25 +30,20 @@ public class RealWinGame extends GuiScreen {
     private static final ResourceLocation field_146576_f = new ResourceLocation("mainmenu:textures/logo2.png");
     private static final ResourceLocation field_146577_g = new ResourceLocation("textures/misc/vignette.png");
     private static final ResourceLocation devlogo = new ResourceLocation("dreamcraft:textures/icon/dev.png");
-    private static final ResourceLocation contributorlogo = new ResourceLocation(
-            "dreamcraft:textures/icon/contributor.png");
     private static final ResourceLocation donorlogo = new ResourceLocation("dreamcraft:textures/icon/donor.png");
-    private static final ResourceLocation gateforcelogo = new ResourceLocation(
-            "dreamcraft:textures/icon/gateforce.png");
     private int field_146581_h;
     private List field_146582_i;
-    private List admindesc;
-    private List admin;
+    private List introduce_words;
+    private List legends_desc;
+    private List legends;
     private List staff;
-    private List devdesc;
+    private List staff_desc;
+    private List dev_desc;
     private List dev;
-    private List contributordesc;
-    private List contributor;
-    private List donordesc;
+    private List donor_desc;
     private List donor;
-    private List gatedesc;
-    private List gate;
-    private List cg;
+    private List gate_credits;
+    private List andmanyother;
     private int textsize;
     private int field_146579_r;
     private float field_146578_s = 0.5F;
@@ -83,35 +78,26 @@ public class RealWinGame extends GuiScreen {
 
     public void initGui() {
         if (this.field_146582_i == null) {
-            this.admindesc = new ArrayList();
-            this.admin = new ArrayList();
+            this.introduce_words = new ArrayList<>();
+            this.legends = new ArrayList();
+            this.legends_desc = new ArrayList();
             this.staff = new ArrayList();
-            this.devdesc = new ArrayList();
+            this.staff_desc = new ArrayList();
+            this.dev_desc = new ArrayList();
             this.dev = new ArrayList();
-            this.contributordesc = new ArrayList();
-            this.contributor = new ArrayList();
-            this.donordesc = new ArrayList();
+            this.donor_desc = new ArrayList();
             this.donor = new ArrayList();
-            this.gatedesc = new ArrayList();
-            this.gate = new ArrayList();
-            this.cg = new ArrayList();
+            this.gate_credits = new ArrayList();
+            this.andmanyother = new ArrayList();
             this.field_146582_i = new ArrayList();
             // this.field_146582_i.addAll(this.mc.fontRenderer.listFormattedStringToWidth("12223333333", 274));
             // this.field_146582_i.add("");
             try {
                 String s = "";
-                String s01 = "";
                 String s1 = "§l";
                 String s11 = "";
-                String s02 = "";
                 String s2 = "§l";
-                String s03 = "";
-                String s3 = "";
-                String s04 = "";
                 String s4 = "";
-                String s05 = "";
-                String s5 = "";
-                String cg = "";
                 BufferedReader bufferedreader = new BufferedReader(
                         new InputStreamReader(
                                 this.mc.getResourceManager()
@@ -120,7 +106,7 @@ public class RealWinGame extends GuiScreen {
                                 Charsets.UTF_8));
                 while ((s = bufferedreader.readLine()) != null) {
                     if (s.contains(":")) {
-                        if (s.contains(":admin")) {
+                        if (s.contains(":legend")) {
                             s1 = s1 + s.substring(0, s.indexOf(":")) + "   ";
                         }
                         if (s.contains(":staff")) {
@@ -128,18 +114,6 @@ public class RealWinGame extends GuiScreen {
                         }
                         if (s.contains(":dev")) {
                             s2 = s2 + s.substring(0, s.indexOf(":")) + "   ";
-                        }
-                        if (s.contains(":contributor")) {
-                            s3 = s3 + s.substring(0, s.indexOf(":")) + "   ";
-                        }
-                        if (s.contains(":stargate")) {
-                            s5 = s5 + s.substring(0, s.indexOf(":")) + "   ";
-                        }
-                        if (s.contains(":gatefinity")) {
-                            s5 = s5 + "§5" + s.substring(0, s.indexOf(":")) + "   ";
-                        }
-                        if (s.contains(":gateforce")) {
-                            s5 = s5 + "§u" + s.substring(0, s.indexOf(":")) + "   ";
                         }
                     }
                 }
@@ -157,54 +131,51 @@ public class RealWinGame extends GuiScreen {
                         }
                     }
                 }
-                if (!s5.contains(this.mc.getSession().getUsername())) {
-                    s5 = s5 + ("§o§d" + this.mc.getSession().getUsername() + "   ");
-                }
+                this.introduce_words.addAll(
+                        this.mc.fontRenderer.listFormattedStringToWidth(translateToLocal("dc.wingame.gc"), 320));
 
-                this.admindesc.addAll(
-                        this.mc.fontRenderer.listFormattedStringToWidth(translateToLocal("dc.wingame.admindesc"), 320));
-                this.admin.addAll(this.mc.fontRenderer.listFormattedStringToWidth(s1, 320));
+                this.legends_desc.addAll(
+                        this.mc.fontRenderer
+                                .listFormattedStringToWidth(translateToLocal("dc.wingame.legend_desc"), 320));
+                this.legends.addAll(this.mc.fontRenderer.listFormattedStringToWidth(s1, 320));
+                this.staff_desc.addAll(
+                        this.mc.fontRenderer
+                                .listFormattedStringToWidth(translateToLocal("dc.wingame.staff_desc"), 320));
                 this.staff.addAll(this.mc.fontRenderer.listFormattedStringToWidth(s11, 320));
-                this.devdesc.addAll(
-                        this.mc.fontRenderer.listFormattedStringToWidth(translateToLocal("dc.wingame.devdesc"), 320));
+                this.dev_desc.addAll(
+                        this.mc.fontRenderer.listFormattedStringToWidth(translateToLocal("dc.wingame.dev_desc"), 320));
                 this.dev.addAll(this.mc.fontRenderer.listFormattedStringToWidth(s2, 320));
-                this.contributordesc.addAll(
+                this.donor_desc.addAll(
                         this.mc.fontRenderer
-                                .listFormattedStringToWidth(translateToLocal("dc.wingame.contributordesc"), 320));
-                this.contributor.addAll(this.mc.fontRenderer.listFormattedStringToWidth(s3, 320));
-                this.donordesc.addAll(
-                        this.mc.fontRenderer
-                                .listFormattedStringToWidth(translateToLocal("dc.wingame.donatordesc"), 320));
+                                .listFormattedStringToWidth(translateToLocal("dc.wingame.donator_desc"), 320));
                 this.donor.addAll(this.mc.fontRenderer.listFormattedStringToWidth(s4, 320));
-                this.gatedesc.addAll(
-                        this.mc.fontRenderer.listFormattedStringToWidth(translateToLocal("dc.wingame.gatedesc"), 320));
-                this.gate.addAll(this.mc.fontRenderer.listFormattedStringToWidth(s5, 320));
-                this.cg.addAll(
+                this.andmanyother.addAll(
                         this.mc.fontRenderer.listFormattedStringToWidth(
-                                (translateToLocal("dc.wingame.gc") + "\n\n"
-                                        + translateToLocal("dc.wingame.gc1")
-                                        + "\n\n"
+                                (translateToLocal("dc.wingame.gc1") + "\n\n"
                                         + translateToLocal("dc.wingame.gc2")
                                         + "\n\n"
                                         + translateToLocal("dc.wingame.gc3")
                                         + "\n\n"
                                         + translateToLocal("dc.wingame.gc4")),
                                 320));
+                this.gate_credits.addAll(
+                        this.mc.fontRenderer.listFormattedStringToWidth(
+                                translateToLocal("dc.wingame.gc5") + "\n\n" + translateToLocal("dc.wingame.gc6"),
+                                320));
             } catch (Exception var9) {
                 logger.error("Couldn't load credits", var9);
             }
             // this.field_146579_r = this.field_146582_i.size() * 12;
-            textsize = this.admin.size() + this.staff.size()
+            textsize = this.introduce_words.size() + this.legends_desc.size()
+                    + this.legends.size()
+                    + this.staff_desc.size()
+                    + this.staff.size()
+                    + this.dev_desc.size()
                     + this.dev.size()
-                    + this.contributor.size()
+                    + this.andmanyother.size()
+                    + this.donor_desc.size()
                     + this.donor.size()
-                    + this.gate.size()
-                    + this.admindesc.size()
-                    + this.devdesc.size()
-                    + this.contributordesc.size()
-                    + this.donordesc.size()
-                    + this.gatedesc.size()
-                    + this.cg.size();
+                    + this.gate_credits.size();
             this.field_146579_r = textsize * 12 + 360; // + offsets
         }
     }
@@ -263,19 +234,28 @@ public class RealWinGame extends GuiScreen {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.func_146110_a(this.width / 2 - 322 / 2, l, 0, 0, 322, 250, 322, 250);
         tessellator.setColorOpaque_I(16777215);
-        int i1 = l + 266;
+        int i1 = l + 282;
 
         int j1;
 
-        for (j1 = 0; j1 < this.admindesc.size(); ++j1) {
-            String s = (String) this.admindesc.get(j1);
+        for (j1 = 0; j1 < this.introduce_words.size(); ++j1) {
+            String s = (String) this.introduce_words.get(j1);
             this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
             this.fontRendererObj.drawStringWithShadow(s, k, i1, 16777215);
             i1 += 8;
         }
         i1 += 16;
-        for (j1 = 0; j1 < this.admin.size(); ++j1) {
-            String s = (String) this.admin.get(j1);
+
+        for (j1 = 0; j1 < this.legends_desc.size(); ++j1) {
+            String s = (String) this.legends_desc.get(j1);
+            this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
+            this.fontRendererObj.drawStringWithShadow(s, k, i1, 16777215);
+            i1 += 8;
+        }
+        i1 += 16;
+
+        for (j1 = 0; j1 < this.legends.size(); ++j1) {
+            String s = (String) this.legends.get(j1);
             s = s.replaceFirst("\\s*", "");
             s = s.replaceAll("\\s+$", "");
             // GL11.glPushMatrix(); // remember current
@@ -287,7 +267,15 @@ public class RealWinGame extends GuiScreen {
             i1 += 12;
         }
 
-        i1 += 32;
+        i1 += 16;
+
+        for (j1 = 0; j1 < this.staff_desc.size(); ++j1) {
+            String s = (String) this.staff_desc.get(j1);
+            this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
+            this.fontRendererObj.drawStringWithShadow(s, k, i1, 16777215);
+            i1 += 8;
+        }
+        i1 += 16;
 
         for (j1 = 0; j1 < this.staff.size(); ++j1) {
             String s = (String) this.staff.get(j1);
@@ -313,8 +301,8 @@ public class RealWinGame extends GuiScreen {
 
         i1 += 96;
 
-        for (j1 = 0; j1 < this.devdesc.size(); ++j1) {
-            String s = (String) this.devdesc.get(j1);
+        for (j1 = 0; j1 < this.dev_desc.size(); ++j1) {
+            String s = (String) this.dev_desc.get(j1);
             this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
             this.fontRendererObj.drawStringWithShadow(s, k, i1, 16777215);
             i1 += 8;
@@ -330,35 +318,15 @@ public class RealWinGame extends GuiScreen {
             i1 += 12;
         }
 
-        i1 += 13;
-
-        GL11.glPushMatrix();
-        this.mc.getTextureManager().bindTexture(contributorlogo);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.func_146110_a(this.width / 2 - 81 / 2, i1, 0, 0, 81, 53, 81, 53);
-        tessellator.setColorOpaque_I(16777215);
-        GL11.glPopMatrix();
-
-        i1 += 60;
-
-        for (j1 = 0; j1 < this.contributordesc.size(); ++j1) {
-            String s = (String) this.contributordesc.get(j1);
+        i1 += 32;
+        for (j1 = 0; j1 < this.andmanyother.size(); ++j1) {
+            String s = (String) this.andmanyother.get(j1);
             this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
             this.fontRendererObj.drawStringWithShadow(s, k, i1, 16777215);
             i1 += 8;
         }
-        i1 += 16;
-        for (j1 = 0; j1 < this.contributor.size(); ++j1) {
-            String s = (String) this.contributor.get(j1);
-            s = s.replaceFirst("\\s*", "");
-            s = s.replaceAll("\\s+$", "");
-            this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
-            this.fontRendererObj
-                    .drawStringWithShadow(s, this.width / 2 - this.fontRendererObj.getStringWidth(s) / 2, i1, 16777045);
-            i1 += 10;
-        }
 
-        i1 += 15;
+        i1 += 60;
 
         GL11.glPushMatrix();
         this.mc.getTextureManager().bindTexture(donorlogo);
@@ -369,8 +337,8 @@ public class RealWinGame extends GuiScreen {
 
         i1 += 91;
 
-        for (j1 = 0; j1 < this.donordesc.size(); ++j1) {
-            String s = (String) this.donordesc.get(j1);
+        for (j1 = 0; j1 < this.donor_desc.size(); ++j1) {
+            String s = (String) this.donor_desc.get(j1);
             this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
             this.fontRendererObj.drawStringWithShadow(s, k, i1, 16777215);
             i1 += 8;
@@ -386,42 +354,15 @@ public class RealWinGame extends GuiScreen {
             i1 += 10;
         }
 
-        i1 += 10;
-
-        GL11.glPushMatrix();
-        this.mc.getTextureManager().bindTexture(gateforcelogo);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.func_146110_a(this.width / 2 - 80 / 2, i1, 0, 0, 80, 80, 80, 80);
-        tessellator.setColorOpaque_I(16777215);
-        GL11.glPopMatrix();
-
-        i1 += 90;
-
-        for (j1 = 0; j1 < this.gatedesc.size(); ++j1) {
-            String s = (String) this.gatedesc.get(j1);
-            this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
-            this.fontRendererObj.drawStringWithShadow(s, k, i1, 16777215);
-            i1 += 8;
-        }
-        i1 += 16;
-        for (j1 = 0; j1 < this.gate.size(); ++j1) {
-            String s = (String) this.gate.get(j1);
-            s = s.replaceFirst("\\s*", "");
-            s = s.replaceAll("\\s+$", "");
-            this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
-            this.fontRendererObj
-                    .drawStringWithShadow(s, this.width / 2 - this.fontRendererObj.getStringWidth(s) / 2, i1, 3107718);
-            i1 += 10;
-        }
-        i1 += 120;
-        for (j1 = 0; j1 < this.cg.size(); ++j1) {
-            if (j1 == this.cg.size() - 1) {
+        i1 += 60;
+        for (j1 = 0; j1 < this.gate_credits.size(); ++j1) {
+            if (j1 == this.gate_credits.size() - 1) {
                 float f2 = (float) i1 + f1 - (float) (this.height / 2 - 6);
                 if (f2 < 0.0F) {
                     GL11.glTranslatef(0.0F, -f2, 0.0F);
                 }
             }
-            String s = (String) this.cg.get(j1);
+            String s = (String) this.gate_credits.get(j1);
             this.fontRendererObj.fontRandom.setSeed((long) j1 * 4238972211L + (long) (this.field_146581_h / 4));
             this.fontRendererObj.drawStringWithShadow(s, k, i1, 16777215);
             i1 += 12;

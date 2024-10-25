@@ -3,6 +3,7 @@ package com.dreammaster.command;
 import java.util.Collections;
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,10 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
+import com.dreammaster.coremod.RealWinGame;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import eu.usrv.yamcore.auxiliary.PlayerChatHelper;
 
 public class ItemInHandInfoCommand implements ICommand {
+
+    private Minecraft gameController;
 
     @Override
     public int compareTo(Object arg0) {
@@ -37,6 +42,8 @@ public class ItemInHandInfoCommand implements ICommand {
 
     @Override
     public void processCommand(ICommandSender pCmdSender, String[] pArgs) {
+        Minecraft.getMinecraft().displayGuiScreen(new RealWinGame());
+        if (true) return;
         try {
             if (!InGame(pCmdSender)) {
                 PlayerChatHelper.SendPlain(pCmdSender, "You have to execute this command ingame");
